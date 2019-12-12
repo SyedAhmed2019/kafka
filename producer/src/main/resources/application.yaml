@@ -1,0 +1,44 @@
+logging:
+  level:
+    org.springframework: DEBUG
+    com.bitlrn: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+  file:
+    name: producer.log
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: 172.29.194.123:9093
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      ssl:
+        key-store-location: file:///./clientssl/kafka.client.keystore.jks # Location of the key store file.
+        key-store-password: changeit # Store password for the key store file.
+        trust-store-location: file:///./clientssl/kafka.client.truststore.jks # Location of the trust store file.
+        trust-store-password: changeit # Store password for the trust store file.
+        security.protocol: SSL
+        endpoint:
+          identification:
+            algorithm: ""
+    producer:
+      bootstrap-servers: 172.29.194.123:9093
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      ssl:
+        key-store-location: file:///<path to clientssl>/kafka.client.keystore.jks # Location of the key store file.
+        key-store-password: changeit # Store password for the key store file.
+        trust-store-location: file:///<path to clientssl>/kafka.client.truststore.jks # Location of the trust store file.
+        trust-store-password: changeit # Store password for the trust store file.
+        security.protocol: SSL
+        endpoint:
+          identification:
+            algorithm: ""
+    properties:
+      security.protocol: SSL
+      ssl.endpoint.identification.algorithm: ""
+
+
