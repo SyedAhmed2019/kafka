@@ -12,6 +12,18 @@ as listed
 Update the application.yml with your <clientssl> directory location
 
 ## Step 2 
+Go to producer directory and build it 
+```
+cd producer
+gradle clean build 
+```
+
+## Step 3 
+Run producer 
+```
+cd build/libs/
+java -jar producer-0.0.1-SNAPSHOT.jar
+```
 
 ### Reference Documentation
 For further reference, please consider the following sections:
