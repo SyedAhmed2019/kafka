@@ -39,7 +39,7 @@ public class ProducerApplication implements ApplicationRunner {
 		//TODO: use the passed parameters to dynamically change the config below
 
 		//sending 1000 messages, 65KB, on topic test2 with dummyKey in single thread
-		this.sendMessages(template,1000,65*1024,"test2","dummyKey",1);
+		this.sendMessages(template,1000,65*1024,"test2","dummyKey",100);
 
 		Thread.sleep(60000);
 
@@ -51,19 +51,21 @@ public class ProducerApplication implements ApplicationRunner {
 				topicName,keyName,numberOfThread);
 		ExecutorService executor = Executors.newFixedThreadPool(numberOfThread);
 		String message = MessageUtil.createDataSize(sizeOfMessageInKb);
-		executor.execute(new Runnable() {
-			@Override
-			public void run() {
-				int i = 1;
-				while(i <= numOfMessages){
-					logger.info("Sending message {} of size {}",i,sizeOfMessageInKb);
-					template.send(topicName, keyName,message);
-					i++;
+		for ( int j=0; j <= numberOfThread; j++) {
+			executor.execute(new Runnable() {
+				@Override
+				public void run() {
+					int i = 1;
+					while (i <= numOfMessages) {
+						logger.info("Sending message {} of size {}", i, sizeOfMessageInKb);
+						template.send(topicName, keyName, message);
+						i++;
+					}
 				}
-			}
-		});
+			});
+		}
 		logger.info("Executor with {} created. Waiting for {} ms",numberOfThread,numOfMessages);
-		Thread.sleep(numOfMessages);
+		Thread.sleep(numOfMessages*numberOfThread);
 		logger.info("Shutting down the executor");
 		executor.shutdown();
 		while (!executor.isTerminated()) {
