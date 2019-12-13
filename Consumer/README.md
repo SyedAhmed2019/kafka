@@ -1,4 +1,4 @@
-# Getting Started on using the sample ProducerApp with Kafka SSL 
+# Getting Started on using the sample ConsumerApp with Kafka SSL 
 
 ## Pre-requisites 
 
@@ -12,17 +12,17 @@ as listed
 Update the application.yml with your <clientssl> directory location
 
 ## Step 2 
-cd consumer dir and gradle clean build 
+Go to  consumer directory and cd build 
 ```
 cd consumer
 gradle clean build 
 ```
 
 ## Step 3
-To run consumer (default is tracks 1000 messages)
+To run consumer (default is tracks 1000 receivedc messages)
 ```
 cd build/libs/
-java -jar consumer.jar 
+java -jar consumer-0.0.1-SNAPSHOT.jar 
 ```
 
 
