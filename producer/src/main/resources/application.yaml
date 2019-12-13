@@ -16,9 +16,9 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       ssl:
-        key-store-location: file:///./clientssl/kafka.client.keystore.jks # Location of the key store file.
+        key-store-location: file:///<yourdir>/clientssl/kafka.client.keystore.jks # Location of the key store file.
         key-store-password: changeit # Store password for the key store file.
-        trust-store-location: file:///./clientssl/kafka.client.truststore.jks # Location of the trust store file.
+        trust-store-location: file:///<yourdir>/clientssl/kafka.client.truststore.jks # Location of the trust store file.
         trust-store-password: changeit # Store password for the trust store file.
         security.protocol: SSL
         endpoint:
